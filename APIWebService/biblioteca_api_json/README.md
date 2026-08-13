@@ -33,3 +33,16 @@ O Escopo atual inclui operaçoes básica de gerenciamento de dados persistidos e
 
 ## 4. EndPoint da API (BackEnd)
 
+| Método | EndPoint | Descrição |
+| - | - | - |
+| GET | /users | Listar todos os usuários |
+| GET | /users/{id} | Busca um usuário pelo ID |
+| POST | /users | Criar um novo Usuário |
+| PUT | /users/{id} | Atualiza um usuário |
+| DELETE | /users/{id} | Remove o usuário |
+| GET | /books | Listar todos os livros |
+| GET | /books/{id} | Busca um livro pelo ID |
+| POST | /books | Criar um novo livro |
+| PUT | /books/{id} | Atualiza um livro |
+| DELETE | /books/{id} | Remove o livro |
+| GET | |/loans | Listar todos os emprestimos
