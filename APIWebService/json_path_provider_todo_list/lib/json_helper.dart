@@ -1,42 +1,63 @@
 //Logica de persistencia de dados
 
 import 'dart:convert';
-import 'dart:io';
+import 'dart:html';
 
-import 'package:path_provider/path_provider.dart';
-//importar o path_provider
+import 'package:flutter/foundation.dart';
 
 class JsonHelper {
-  //metodo static => metodos da classe e nao do OBJ ( para usar o metodo nao precisa instanciar OBJ)
-  // 1. metodo Obter Arquivo json (static)
-  static Future<File> _getArquivo() async {
-    final diretorio =
-        await getApplicationDocumentsDirectory(); //buscando os arquivos do aplicativo
-    return File(
-      "${diretorio.path}/bd.json",
-    ); // retorno o caminho do arquivo json
-    //se arquivo nao existir, ele sera criado automaticamente
-  }
-
-  // 2. Ler todos os dados do json (converter o json em map)
-  static Future<Map<String, dynamic>> lerDados() async {
+  static Future<Map<String, dynamic>> lerDados([
+    String nomeArquivo = 'bd.json',
+  ]) async {
     try {
-      final arquivo = await _getArquivo(); //busco o arquivo
-      //verifica se o arquivo existe
-      if (await arquivo.exists()) {
-        String conteudo = await arquivo.readAsString();
-        return json.decode(conteudo);
+      final valor = window.localStorage[nomeArquivo];
+      if (valor == null || valor.trim().isEmpty) {
+        window.localStorage[nomeArquivo] = json.encode({});
+        return {};
+      }
+
+      final decoded = json.decode(valor);
+      if (decoded is Map) {
+        return Map<String, dynamic>.from(decoded);
       }
     } catch (e) {
-      print("Erro ao ler o arquivo: $e");
+      debugPrint('Erro ao ler o arquivo $nomeArquivo: $e');
     }
-    return {}; //Retorna um Map vazio se nao existir ou der erro
+    return {};
   }
 
-  // 3. Salvar os dados no arquivo json
-  static Future<void> salvarDados(Map<String, dynamic> dados) async {
-    final arquivo = await _getArquivo(); // pegando logal do arquivo
-    String jsonString = json.encode(dados); // transformando MAP em Json
-    await arquivo.writeAsString(jsonString);// armazenando os dados no local
+  static Future<dynamic> lerArquivo([
+    String nomeArquivo = 'produtos.json',
+  ]) async {
+    try {
+      final valor = window.localStorage[nomeArquivo];
+      if (valor == null || valor.trim().isEmpty) {
+        window.localStorage[nomeArquivo] = json.encode([]);
+        return [];
+      }
+      return json.decode(valor);
+    } catch (e) {
+      debugPrint('Erro ao ler o arquivo $nomeArquivo: $e');
+    }
+    return [];
+  }
+
+  static Future<void> salvarDados(
+    Map<String, dynamic> dados, [
+    String nomeArquivo = 'bd.json',
+  ]) async {
+    try {
+      window.localStorage[nomeArquivo] = json.encode(dados);
+    } catch (e) {
+      debugPrint('Erro ao salvar o arquivo $nomeArquivo: $e');
+    }
+  }
+
+  static Future<void> salvarArquivo(String nomeArquivo, dynamic dados) async {
+    try {
+      window.localStorage[nomeArquivo] = json.encode(dados);
+    } catch (e) {
+      debugPrint('Erro ao salvar o arquivo $nomeArquivo: $e');
+    }
   }
 }
