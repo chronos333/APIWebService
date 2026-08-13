@@ -45,4 +45,90 @@ O Escopo atual inclui operaçoes básica de gerenciamento de dados persistidos e
 | POST | /books | Criar um novo livro |
 | PUT | /books/{id} | Atualiza um livro |
 | DELETE | /books/{id} | Remove o livro |
-| GET | |/loans | Listar todos os emprestimos
+| GET | /loans | Listar todos os empréstimos |
+| GET | /loans/{id} | Listar um empréstimo pelo ID |
+| POST | /loans | Registrar um novo Empréstimo |
+
+## 5. Diagramas
+
+### 5.1 Diagrama de Entidades Relacionais (DER)
+
+```mermaid 
+
+erDiagram
+
+    USER {
+        int id PK
+        string name
+        string email
+    }
+
+    BOOK {
+        int id PK
+        string title
+        string author
+        boolean avaliable
+    }
+
+    LOAN {
+        int id PK
+        int userId FK
+        Int bookId FK
+        date startDate
+        Date dueDate
+        boolean returned
+    }
+
+    USER ||--o{ LOAN: "do"
+    BOOK ||--o{ LOAN: "is loan by/in"
+
+```
+
+### 5.2 Diagramas de classe 
+
+```mermaid
+
+classDiagram
+
+    class UserModel{
+        -String? id
+        -String name
+        -String email
+        +toMap() Map
+        +fromMap(Map map) UserModel
+    }
+
+    class BookModel {
+        -String? id
+        -String title
+        -String author
+        -bool avaliable
+        +toMap() Map
+        +fromMap(Map map) BokkModel
+    }
+
+    class LoanModel {
+        -String? id
+        -UserModel user
+        -BookModel book
+        -Datetime startDate
+        -bool returned
+        +toMap() Map
+        +fromMap(Map map) LoanModel
+    }
+
+    class ApiService {
+        <<static>>
+        -String_baseUrl
+        +getList(string path) Future<List>
+        +getOne(String path , String id) Future<Map>
+        +post (String path, Map body) Future<Map>
+        +put(String path, Map body, String id) Future<Map>
+        +delete<String path, String id> void
+    }
+
+    class UserController{CRUD}
+
+    class BookController{CRUD}
+
+    class LoanController{CRUD}
