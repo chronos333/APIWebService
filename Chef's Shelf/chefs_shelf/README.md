@@ -59,7 +59,7 @@ Antes de executar o projeto, tenha instalado:
 ### 1. Clonar o repositório
 
 ```bash
-git clone URL_DO_SEU_REPOSITORIO
+git clone https://github.com/chronos333/APIWebService/tree/main/Chef's%20Shelf/chefs_shelf
 cd chefs_shelf
 ```
 
