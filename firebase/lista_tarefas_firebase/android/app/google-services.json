@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "816496542946",
+    "project_id": "listatarefafirebasepini",
+    "storage_bucket": "listatarefafirebasepini.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:816496542946:android:ead83577837d6462accabb",
+        "android_client_info": {
+          "package_name": "com.example.lista_tarefas_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "816496542946-hg1nho1lfhp8anau9g3boga7bc13d4cp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzRUd7Y3DKCD43M3AtQl9lCo_PY_uFo6E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "816496542946-hg1nho1lfhp8anau9g3boga7bc13d4cp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
